@@ -1,3 +1,3 @@
 sealhood.github.io
 ==================
-A note o githut
+My notes on github
