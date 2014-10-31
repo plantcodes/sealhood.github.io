@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Bootstrap</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/bootstrap.css"/>
+    <style>
+      body {
+        background: url('assets/img/textured_paper.png') repeat top left;
+        background-color: #f6f6f6;
+      }
+      .main {
+        padding: 0px 40px;
+        background: rgba(255,255,255,0.5);
+        -webkit-box-shadow: 0 0 20px #d2d2d2;
+        box-shadow: 0 0 20px #d2d2d2;
+      }
+      .container {
+        width: 1100px;
+      }
+      .nav-list {
+        font-size: 17px;
+      }
+      .nav-header {
+        font-size: 17px;
+        text-transform: none;
+        line-height: 30px;
+      }
+    </style>
+    <link type="text/css" rel="stylesheet" href="assets/css/bootstrap-responsive.css"/>
+    
+  </head>
+<body>
+
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span3">
+        <ul class="nav nav-list"><li><a href="#daemon_process">daemon process</a></li><li><a href="#error_logging">Error logging</a></li><li><a href="#single_instance_daemons">Single Instance Daemons</a></li><li><a href="#daemon_conventions">Daemon conventions</a></li><li><a href="#client_server_model">Client-Server model</a></li></ul>
+      </div>
+      <div class="span9 main">
+        <a name="daemon_process"></a><h2>daemon process<a class="anchorlink" href="#daemon_process"></a></h2>
+<ul class="list">
+<li>live for a long time</li>
+<li>are started when system is bootstrapped</li>
+<li>terminate when system is shut down</li>
+<li>don&#39;t have a controlling terminal (run in the background)</li>
+</ul>
+<a name="error_logging"></a><h3>Error logging<a class="anchorlink" href="#error_logging"></a></h3>
+<p>A central daemon error-logging facility: BSD syslog. There are 
+<strong>three way to generate log messages</strong>:</p>
+<ol class="list">
+<li><code>log</code> function,read/write <code>/dev/klog</code> device, for kernel routines</li>
+<li><code>syslog</code> function, send messages to UNIX domain datagram socket <code>/dev/log</code>, for user process</li>
+<li><p>send log messages to udp port 514, for user process local or remote</p>
+<pre class="prettyprint"> #include &lt;syslog.h&gt;
+ void openlog(const char *ident, int option, int facility);     #optional
+ void syslog(int priority, const char *format, ...);            #
+ void closelog(void);                                        #optional
+ int setlogmask(int maskpri);
+ Returns: previous log priority mask value</pre>
+</li>
+</ol>
+<a name="single_instance_daemons"></a><h3>Single Instance Daemons<a class="anchorlink" href="#single_instance_daemons"></a></h3>
+<p>Only one copy of the daemon running on the system.
+<code>File-/record-locking mechanism</code> ensure only one copye of the daemon running.
+Each daemon create a file with a fixed name and place a write lock on it. Then the successive attempts to create write lock will fail.</p>
+<a name="daemon_conventions"></a><h3>Daemon conventions<a class="anchorlink" href="#daemon_conventions"></a></h3>
+<ul class="list">
+<li>If the daemon a lock file , store it in <code>/var/run</code>. The file name is <code>name.pid</code>.</li>
+<li>If the daemon supports configuration options, they are usually stored in /etc. The file is named <code>name.conf</code>.</li>
+<li>They are usually started from one of the system initialization scripts. <code>/etc/rc*</code> or <code>/etc/init.d/*</code></li>
+<li>If a daemon has a configuration file, the daemon reads the file <em>when it starts</em>, but usually won’t look at it again. If an administrator <strong>changes the configuration</strong>, the daemon would need to be <strong>stopped and restarted</strong> to account for the configuration changes. </li>
+</ul>
+<a name="client_server_model"></a><h3>Client-Server model<a class="anchorlink" href="#client_server_model"></a></h3>
+<p>Server process is a daemon process. It uses <code>fork</code> and <code>exec</code> anther program to provide service to a client. These servers manage multiple file descriptors: <code>communication endpoints</code>, <code>configuration files</code>, <code>log files</code>, and the like. Leaving this files open in the child, is somewhat dangerous. <strong>An easy solution</strong> to this problem is to set the <code>close-on-exec</code> flag for all file descriptors that the executed program won’t need.</p>
+
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+</body>
+</html>

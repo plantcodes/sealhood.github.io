@@ -97,7 +97,7 @@ Sometimes we want process coorperate to accomplish a job. But the order and exec
     int fexecve(int fd, char *const argv[], char *const envp[]);
     /* All seven return: –1 on error, no return on success */
 
-![seven-exec.jpg](images/seven-exec.jpg)
+![seven-exec.jpg](./images/seven-exec.jpg)
 
 When a filename argument is specified,
 
