@@ -1,7 +1,7 @@
 ## Blogs List ##
 
 ### *note.progit* ###
-[note.progit](./note.progit.html)
+* [Progit](./note.progit.html)
 
 ### *note.apue* ###
 * [6. System-data-file](./note.apue.system-data-file.html)
