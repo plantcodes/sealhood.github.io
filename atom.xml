@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[Sealhood@GitHubPage]]></title>
   <link href="http://sealhood.github.io/atom.xml" rel="self"/>
   <link href="http://sealhood.github.io/"/>
-  <updated>2015-01-05T16:09:48+08:00</updated>
+  <updated>2015-01-05T16:48:11+08:00</updated>
   <id>http://sealhood.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Sealhood]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Fist-touch]]></title>
+    <link href="http://sealhood.github.io/blog/2015/01/05/fist-touch/"/>
+    <updated>2015-01-05T16:44:22+08:00</updated>
+    <id>http://sealhood.github.io/blog/2015/01/05/fist-touch</id>
+    <content type="html"><![CDATA[<p>Nothing.</p>
+]]></content>
+  </entry>
   
 </feed>
