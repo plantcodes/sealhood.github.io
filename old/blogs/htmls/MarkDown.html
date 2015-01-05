@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Bootstrap</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/bootstrap.css"/>
+    <style>
+      body {
+        background: url('assets/img/textured_paper.png') repeat top left;
+        background-color: #f6f6f6;
+      }
+      .main {
+        padding: 0px 40px;
+        background: rgba(255,255,255,0.5);
+        -webkit-box-shadow: 0 0 20px #d2d2d2;
+        box-shadow: 0 0 20px #d2d2d2;
+      }
+      .container {
+        width: 1100px;
+      }
+      .nav-list {
+        font-size: 17px;
+      }
+      .nav-header {
+        font-size: 17px;
+        text-transform: none;
+        line-height: 30px;
+      }
+    </style>
+    <link type="text/css" rel="stylesheet" href="assets/css/bootstrap-responsive.css"/>
+    
+  </head>
+<body>
+
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span3">
+        <ul class="nav nav-list"><li><a href="#__">标题</a></li><li><a href="#____">区块引用</a></li><li><a href="#__">列表</a></li><li><a href="#____">代码区块</a></li><li><a href="#___">分割线</a></li><li><a href="#__">链接</a></li><li><a href="#__">强调</a></li><li><a href="#____">行内代码</a></li><li><a href="#__">图片</a></li><li><a href="#___">反斜杠</a></li></ul>
+      </div>
+      <div class="span9 main">
+        <hr>
+<a name="__"></a><h2>标题<a class="anchorlink" href="#__"></a></h2>
+<pre class="prettyprint">以\#开头的文字</pre>
+<hr>
+<a name="____"></a><h2>区块引用<a class="anchorlink" href="#____"></a></h2>
+<pre class="prettyprint">&gt; 普通引用
+&gt;&gt;嵌套引用</pre>
+<hr>
+<a name="__"></a><h2>列表<a class="anchorlink" href="#__"></a></h2>
+<pre class="prettyprint">无序列表
+    * + - 开头
+有序列表
+    数字 与 英文句点开头
+    列表里放引用要缩进</pre>
+<hr>
+<a name="____"></a><h2>代码区块<a class="anchorlink" href="#____"></a></h2>
+<pre class="prettyprint">缩进四个空格或者一个制表符</pre>
+<hr>
+<a name="___"></a><h2>分割线<a class="anchorlink" href="#___"></a></h2>
+<pre class="prettyprint">一行中三个以上的*、-、或 _，行中不包含其他内容</pre>
+<hr>
+<a name="__"></a><h2>链接<a class="anchorlink" href="#__"></a></h2>
+<pre class="prettyprint">链接用[方括号]来标记，紧接其后的（圆括号）内位为链接地址 [链接标记](链接地址)
+参考式链接[链接标记][参考ID]， 链接地址在后面列出，形式为 [参考ID]：链接地址 “标题”
+[链接标记][空白]使用链接标记作为，链接形式为  [链接标记]：链接地址 “标题”</pre>
+<hr>
+<a name="__"></a><h2>强调<a class="anchorlink" href="#__"></a></h2>
+<pre class="prettyprint">使用* 和 _ 作为强调字词的符号， *被强调文字*</pre>
+<hr>
+<a name="____"></a><h2>行内代码<a class="anchorlink" href="#____"></a></h2>
+<pre class="prettyprint">反引号内为行内代码  `行内代码\`</pre>
+<hr>
+<a name="__"></a><h2>图片<a class="anchorlink" href="#__"></a></h2>
+<p>与链接类似，开头多了一个感叹号，形式如下
+<code>![image](./images/sealhood.png)</code></p>
+<h2><img src="./images/sealhood.png" alt="image"></h2>
+<a name="___"></a><h2>反斜杠<a class="anchorlink" href="#___"></a></h2>
+<pre class="prettyprint">用来输入普通字符</pre>
+<hr>
+
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+</body>
+</html>
