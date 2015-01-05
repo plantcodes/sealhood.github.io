@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Bootstrap</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/bootstrap.css"/>
+    <style>
+      body {
+        background: url('assets/img/textured_paper.png') repeat top left;
+        background-color: #f6f6f6;
+      }
+      .main {
+        padding: 0px 40px;
+        background: rgba(255,255,255,0.5);
+        -webkit-box-shadow: 0 0 20px #d2d2d2;
+        box-shadow: 0 0 20px #d2d2d2;
+      }
+      .container {
+        width: 1100px;
+      }
+      .nav-list {
+        font-size: 17px;
+      }
+      .nav-header {
+        font-size: 17px;
+        text-transform: none;
+        line-height: 30px;
+      }
+    </style>
+    <link type="text/css" rel="stylesheet" href="assets/css/bootstrap-responsive.css"/>
+    
+  </head>
+<body>
+
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span3">
+        <ul class="nav nav-list"><li><a href="#process_environment">Process Environment</a></li><li><a href="#main_function">main Function</a></li><li><a href="#process_termination">Process termination</a></li><li><a href="#environment_list">Environment list</a></li><li><a href="#memory_layout_of_a_c_program">Memory layout of a C program</a></li><li><a href="#setjmp_and_longjmp_functions">setjmp and longjmp Functions</a></li><li><a href="#getrlimit_and_setrlimit_functions">getrlimit and setrlimit Functions</a></li></ul>
+      </div>
+      <div class="span9 main">
+        <a name="process_environment"></a><h2>Process Environment<a class="anchorlink" href="#process_environment"></a></h2>
+<a name="main_function"></a><h3>main Function<a class="anchorlink" href="#main_function"></a></h3>
+<a name="process_termination"></a><h3>Process termination<a class="anchorlink" href="#process_termination"></a></h3>
+<p><strong>Normal termination occurs in five ways:</strong></p>
+<ol class="list">
+<li>Return from main</li>
+<li>Calling exit</li>
+<li>Calling _exit or _Exit</li>
+<li>Return of the last thread from its start routine</li>
+<li>Calling pthread_exit from the last thread</li>
+</ol>
+<p><strong>Abnormal termination occurs in three ways:</strong></p>
+<ol class="list">
+<li>Calling abort</li>
+<li>Receipt of a signal</li>
+<li>Response of the last thread to a cancellation request </li>
+</ol>
+<p><strong>Exit Functions</strong></p>
+<pre class="prettyprint">#include &lt;stdlib.h&gt;     # ISO C
+void exit(int status);  # performs certain cleanup processing and then returns to the kernel.
+void _Exit(int status); # return to the kernel immediately
+#include &lt;unistd.h&gt;     # POSIX
+void _exit(int status); # return to the kernel immediately</pre>
+<p>With ISO C, a process can register at least 32 functions that are automatically called by exit.These are called <strong>exit handlers</strong> and are registered by calling the <strong>atexit function</strong>.</p>
+<pre class="prettyprint">#include &lt;stdlib.h&gt;     # ISO C
+int atexit(void (*func)(void));</pre>
+<p>The following figure shows how a C program is started and how it terminates.
+<img src="./images/c-program-start-terminate.jpg" alt="c-program-start-terminate.jpg"></p>
+<a name="environment_list"></a><h3>Environment list<a class="anchorlink" href="#environment_list"></a></h3>
+<p><strong>Environment list</strong> is an array of character pointers, <code>extern char **environ</code> is a global variable, a pointer to the array of character pointers. It can illustrated as:</p>
+<p class="img-container"><img src="./images/environment-list.jpg" alt="enlist"></p>
+<p>Access to specific environment variables is normally through the getenv and putenv functions, instead of through the environ variable. But to go through the entire environment, the environ pointer must be used.</p>
+<a name="memory_layout_of_a_c_program"></a><h3>Memory layout of a C program<a class="anchorlink" href="#memory_layout_of_a_c_program"></a></h3>
+<p>A c program is composed of the following pieces:</p>
+<ul class="list">
+<li>Text segment, consisting of the machine instructions that the CPU executes. </li>
+<li>Initialized data segment, the C declaration <code>int   maxcount = 99;</code> appearing outside any function causes this variable to be stored in the initialized data segment with its initial value.</li>
+<li>Unitialized data segment, data in this segment is initialized by the kernel to arithmetic 0 or null pointers before the program starts executing. The C declaration <code>long   sum[1000];</code> appearing outside any function causes this variable to be stored in the uninitialized data segment.</li>
+<li>Stack</li>
+<li>Heap</li>
+<li><img src="./images/memory-arrangement.jpg" alt="mr"></li>
+</ul>
+<blockquote>
+<p>Several more segment types exist in an a.out, containing <strong>the symbol table</strong>, <strong>debugging information</strong>, <strong>linkage tables</strong> for dynamic shared libraries, and the like. These additional sections don’t get loaded as part of the program’s image executed by a process.</p>
+</blockquote>
+<a name="setjmp_and_longjmp_functions"></a><h3>setjmp and longjmp Functions<a class="anchorlink" href="#setjmp_and_longjmp_functions"></a></h3>
+<pre class="prettyprint">#include &lt;setjmp.h&gt;
+int setjmp(jmp_buf env);    # Returns: 0 if called directly, nonzero if returning from a call to longjmp
+void longjmp(jmp_buf env, int val);</pre>
+<p>The <code>setjmp</code> function save execution environment for longjmp to roll back. Mostly, the <strong>automatic</strong>, <strong>register</strong> are&#39;t rolled back, and the values of them are <code>it depends</code>. Global(extern, malloc) and static variable are rolled back.
+The <strong>volatile variables</strong> are not optimized by compiler, <strong>because it can be modified by other thread</strong>, can be rolled back. While the <strong>automatic</strong>, <strong>register</strong> is(may be) optimized to register. </p>
+<a name="getrlimit_and_setrlimit_functions"></a><h3>getrlimit and setrlimit Functions<a class="anchorlink" href="#getrlimit_and_setrlimit_functions"></a></h3>
+<pre class="prettyprint">#include &lt;sys/resource.h&gt;
+int getrlimit(int resource, struct rlimit *rlptr);  # Both return: 0 if OK, –1 on error
+int setrlimit(int resource, const struct rlimit *rlptr); # Both return: 0 if OK, –1 on error</pre>
+<p class="img-container"><img src="./images/struct-rlimit.jpg" alt="struct-rlimit.jpg"></p>
+<p>Three rules govern the changing of the resource limits.</p>
+<ol class="list">
+<li>A process can change its soft limit to a value less than or equal to its hard limit.</li>
+<li>A process can lower its hard limit to a value greater than or equal to its soft limit. This lowering of the hard limit is irreversible for normal users.</li>
+<li>Only a superuser process can raise a hard limit.</li>
+</ol>
+<p>The resource argument takes one of the following values.</p>
+<p class="img-container"><img src="./images/resource-limits.jpg" alt="resource-limits.jpg"></p>
+<ul class="list">
+<li><strong>RLIMIT_AS</strong> The maximum size in bytes of a process’s total available memory. This affects the sbrk function and the mmap function.</li>
+<li><strong>RLIMIT_CORE</strong> The maximum size in bytes of a core file. A limit of 0 prevents the creation of a core file.</li>
+<li><strong>RLIMIT_CPU</strong> The maximum amount of CPU time in seconds. When the soft limit is exceeded, the SIGXCPU signal is sent to the process.</li>
+<li><strong>RLIMIT_DATA</strong> The maximum size in bytes of the data segment: the sum of the initialized data, uninitialized data, and heap from Figure 7.6.</li>
+<li><strong>RLIMIT_FSIZE</strong> The maximum size in bytes of a file that may be created. When the soft limit is exceeded, the process is sent the SIGXFSZ signal.</li>
+<li><strong>RLIMIT_MEMLOCK</strong> The maximum amount of memory in bytes that a process can lock into memory using mlock(2).</li>
+<li><strong>RLIMIT_MSGQUEUE</strong> The maximum amount of memory in bytes that a process can allocate for POSIX message queues.</li>
+<li><strong>RLIMIT_NICE</strong> The limit to which a process’s nice value can be raised to affect its scheduling priority.</li>
+<li><strong>RLIMIT_NOFILE</strong>  The maximum number of open files per process. Changing this limit affects the value returned by the sysconf function for its _SC_OPEN_MAX argument.</li>
+<li><strong>RLIMIT_NPROC</strong>  The maximum number of child processes per real user ID. Changing this limit affects the value returned for _SC_CHILD_MAX by the sysconf function</li>
+<li><strong>RLIMIT_NPTS</strong> The maximum number of pseudo terminals that a user can have open at one time.</li>
+<li><p><strong>RLIMIT_RSS</strong>  Maximum resident set size (RSS) in bytes. If available physical memory is low, the kernel takes memory from processes that exceed their RSS.</p>
+<blockquote>
+<p>In computing, resident set size is the portion of a process&#39;s memory that is held in RAM. The rest of the memory exists in swap or the filesystem (never loaded or previously unloaded parts of the executable).</p>
+</blockquote>
+</li>
+<li><p><strong>RLIMIT_SBSIZE</strong>  The maximum size in bytes of socket buffers that a user can consume at any given time.</p>
+</li>
+<li><strong>RLIMIT_SIGPENDING</strong> The maximum number of signals that can be queued for a process. This limit is enforced by the sigqueue function .</li>
+<li><strong>RLIMIT_STACK</strong> The maximum size in bytes of the stack. </li>
+<li><strong>RLIMIT_SWAP</strong> The maximum amount of swap space in bytes that a user can consume.</li>
+<li><strong>RLIMIT_VMEM</strong> This is a synonym for RLIMIT_AS.</li>
+</ul>
+<p><strong>ISO C string-creation operator (#)</strong> </p>
+<p>The <code>#name</code> represent string <code>&quot;name&quot;</code>.</p>
+
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+</body>
+</html>
