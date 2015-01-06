@@ -3,7 +3,7 @@
 # ----------------------- #
 
 url: http://sealhood.github.io
-title: Sealhood@GitHubPage
+title: NANAN
 subtitle: Exceptional Learning Experiences
 author: Sealhood
 simple_search: https://www.google.com/search
@@ -19,7 +19,7 @@ date_format: "ordinal"
 subscribe_rss: /atom.xml
 subscribe_email:
 # RSS feeds can list your email address if you like
-email:
+email: sealhood@gmail.com
 
 # ----------------------- #
 #    Jekyll & Plugins     #
@@ -55,8 +55,8 @@ default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.
 
 # Each layout uses the default asides, but they can have their own asides instead. Simply uncomment the lines below
 # and add an array with the asides you want to use.
-# blog_index_asides:
-# post_asides:
+blog_index_asides: [asides/about.html, asides/recent_posts.html, asides/github.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
+post_asides: [asides/about.html, asides/recent_posts.html, asides/github.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
 # page_asides:
 
 # ----------------------- #
