@@ -4,7 +4,7 @@
   <title><![CDATA[NANAN]]></title>
   <link href="http://sealhood.github.io/atom.xml" rel="self"/>
   <link href="http://sealhood.github.io/"/>
-  <updated>2015-01-06T15:23:41+08:00</updated>
+  <updated>2015-01-06T15:39:23+08:00</updated>
   <id>http://sealhood.github.io/</id>
   <author>
     <name><![CDATA[Sealhood]]></name>
@@ -19,6 +19,15 @@
     <updated>2015-01-05T16:44:22+08:00</updated>
     <id>http://sealhood.github.io/blog/2015/01/05/fist-touch</id>
     <content type="html"><![CDATA[<p>Nothing.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[First-touch]]></title>
+    <link href="http://sealhood.github.io/blog/2015/01/04/first-touch/"/>
+    <updated>2015-01-04T15:30:17+08:00</updated>
+    <id>http://sealhood.github.io/blog/2015/01/04/first-touch</id>
+    <content type="html"><![CDATA[
 ]]></content>
   </entry>
   
